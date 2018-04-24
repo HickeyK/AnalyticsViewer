@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyticsViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="YB Requests" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="Run Date"/>
+        <ComboBox x:Name="RunDateComboBox"
+                  Grid.Row="0"
+                  Grid.Column="1"
+                  ItemsSource="{Binding RequestGroups}"
+                  SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="140" Text="{Binding RunDate,  StringFormat={x:Static local:Formatter.DateTimeFormat}}" />
+                        <TextBlock Width="140" Text="{Binding ValDate,  StringFormat={x:Static local:Formatter.DateFormat}}" />
+                        <TextBlock  Text="{Binding Slot}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <RadioButton x:Name="IncludePortfolio1CheckBox"
+                      IsChecked="{Binding IncludePortfolio1}"
+                      Content="Portfolio 1"
+                      GroupName="Portfolio"
+                      Grid.Row="0"
+                      Grid.Column="0"/>
+            <RadioButton x:Name="IncludePortfolio2CheckBox"
+                      Content="Portfolio 2"
+                      GroupName="Portfolio"
+                      IsChecked="{Binding IncludePortfolio2}"
+                      Grid.Row="0"
+                      Grid.Column="1"/>
+
+            <RadioButton x:Name="IncludePortfolio3CheckBox"
+                      Content="Portfolio 3"
+                      GroupName="Portfolio"
+                      IsChecked="{Binding IncludePortfolio3}"
+                      Grid.Row="0"
+                      Grid.Column="2"/>
+
+            <RadioButton x:Name="IncludePortfolio4CheckBox"
+                      Content="Portfolio 4"
+                      GroupName="Portfolio"
+                      IsChecked="{Binding IncludePortfolio4}"
+                      Grid.Row="0"
+                      Grid.Column="3"/>
+
+        </Grid>
+
+        <DataGrid Grid.Row="2"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  ItemsSource="{Binding Requests}">
+
+        </DataGrid>
     </Grid>
 </Window>

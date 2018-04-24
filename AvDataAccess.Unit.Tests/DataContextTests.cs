@@ -1,24 +1,62 @@
-﻿using System.Data.Linq.Mapping;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Linq.Mapping;
+using System.Linq;
 using AvDataAccess;
 using Moq;
 using Xunit;
 using System.Reflection;
+using AvEntities;
 
 namespace AvDataAccess.Unit.Tests
 {
-    public class DataContextTests
+
+    public class DataContextTests : DatabaseFixture
     {
         [Fact]
         public void Ctor_DoesNotReturnNull()
         {
-            var databaseConfigFileName = "AnalyticViewer.database.config";
-            //var installationDirectory = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var installationDirectory = @"c:\Dev\AnalyticsViewer\AvDataAccess";
-            var databaseConfig = System.IO.Path.Combine(installationDirectory, databaseConfigFileName);
-            var mappingSource = XmlMappingSource.FromUrl(databaseConfig);
-            var avDataContext = new AvDataContext("Data Source=caddbe2e01;Initial Catalog=CADIS_E2E02;Integrated Security=True", mappingSource, false, 30);
 
-            Assert.NotNull(avDataContext);
+            Assert.NotNull(AvDataContext);
         }
+
+        [Fact]
+        public void Dc_Returns_DateList()
+        {
+            // Arrange 
+
+            // Act
+            var dateList = AvDataContext.RunDateList();
+
+            // Assert
+            Assert.NotEmpty(dateList);
+        }
+
+        [Fact]
+        public void Dc_Returns_RequestGroup()
+        {
+            var requestGroup = AvDataContext.RequestGroup();
+
+            Assert.IsType<List<StoreYbAnalyticReq>>(requestGroup);
+            Assert.NotEmpty(requestGroup);
+            Assert.True(requestGroup.Count > 0);
+        }
+
+        [Fact]
+        public void Dc_ReturnsRequestsForRequestGroup()
+        {
+            // Arrange
+            var requestGroup = new StoreYbAnalyticReq() { RunDate = new DateTime(2018, 2, 23, 0, 30, 5), ValDate = new DateTime(2018, 2, 21), Slot = 2, PortfolioId = 1, };
+
+            // Act
+            var requests = AvDataContext.GetRequests(requestGroup);
+
+            // Assert
+            Assert.IsType<List<StoreYbAnalyticReq>>(requests);
+            Assert.NotEmpty(requests);
+            Assert.True(requests.Count > 0);
+        }
+
+
     }
 }
