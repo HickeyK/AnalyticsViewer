@@ -72,6 +72,21 @@ namespace AvDataAccess.Unit.Tests
             Assert.True(requests.Count > 0);
         }
 
+        [Fact]
+        public void Dc_ReturnsRequestsForYieldbookId()
+        {
+            // Arrange
+            string yieldbookId = "AR4164364";
+
+            // Act
+            var requests = AvDataContext.GetRequestsByYieldbookId(yieldbookId);
+
+            // Assert
+            Assert.IsType<List<StoreYbAnalyticReq>>(requests);
+            Assert.NotEmpty(requests);
+            Assert.True(requests.Count > 0);
+        }
+
 
     }
 }

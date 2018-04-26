@@ -80,6 +80,8 @@ namespace AvViewModel
         public ObservableCollection<StoreYbAnalyticReq> Requests { get; set; }
 
         public ICommand RetrieveByIdCommand { get; private set; }
+        public DelegateCommand<string> RetrieveByCadisIdCommand { get; private set; }
+        public DelegateCommand<string> RetrieveByYieldbookIdCommand { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -93,11 +95,22 @@ namespace AvViewModel
 
             RequestGroups = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.RequestGroup());
 
-            RetrieveByIdCommand = new RetrieveByIdCommand(new Action<int>(i =>
+            RetrieveByCadisIdCommand = new DelegateCommand<string>(new Action<string>(i =>
+                {
+                    int cadisId;
+                    if (int.TryParse(i, out cadisId))
+                    {
+                        Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByCadisId(cadisId));
+                        OnPropertyChanged("Requests");
+                    }
+                }));
+
+            RetrieveByYieldbookIdCommand = new DelegateCommand<string>(new Action<string>(i =>
             {
-                Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByCadisId(i));
-                OnPropertyChanged("Requests");
+                 Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByYieldbookId(i));
+                 OnPropertyChanged("Requests");
             }));
+
         }
 
         private void GetRequests()

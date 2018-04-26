@@ -100,5 +100,61 @@ namespace AvDataAccess
                 .ToList();
         }
 
+        public List<StoreYbAnalyticReq> GetRequestsByYieldbookId(string yieldbookId)
+        {
+            return this.StoreYbAnalyticReqs
+                .Where(r => r.YbYieldbookId == yieldbookId)
+                .Select
+                (r => new StoreYbAnalyticReq()
+                {
+                    RunDate = r.RunDate,
+                    ValDate = r.ValDate,
+                    CadisId = r.CadisId,
+                    Slot = r.Slot,
+                    YbYieldbookId = r.YbYieldbookId,
+                    PortfolioId = r.PortfolioId,
+                    UserBond = r.UserBond,
+                    ParAmt = r.ParAmt,
+                    PrepayModel = r.PrepayModel,
+                    PricingLevel = r.PricingLevel,
+                    OutputFile = r.OutputFile,
+                    OutputLine = r.OutputLine,
+                    OmittedFromSecondRun = r.OmittedFromSecondRun
+                })
+                .Distinct()
+                .OrderByDescending(r => r.RunDate)
+                .ToList();
+        }
+
+
+        // Not sure if I can add hints to make this usable from linq to sql query
+        private StoreYbAnalyticReq CreateStoreYbAnalyticReq(StoreYbAnalyticReq r)
+        {
+            return new StoreYbAnalyticReq()
+            {
+                RunDate = r.RunDate,
+                ValDate = r.ValDate,
+                CadisId = r.CadisId,
+                Slot = r.Slot,
+                YbYieldbookId = r.YbYieldbookId,
+                PortfolioId = r.PortfolioId,
+                UserBond = r.UserBond,
+                ParAmt = r.ParAmt,
+                PrepayModel = r.PrepayModel,
+                PricingLevel = r.PricingLevel,
+                OutputFile = r.OutputFile,
+                OutputLine = r.OutputLine,
+                OmittedFromSecondRun = r.OmittedFromSecondRun
+            }
+        }
+
     }
+
+
+
+
+
+
+
 }
+

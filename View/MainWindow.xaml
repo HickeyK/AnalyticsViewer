@@ -51,15 +51,22 @@
                     <Button Content="Retrieve"
                             Grid.Row="0"
                             Grid.Column="2"
-                            Command="{Binding RetrieveByIdCommand}"
+                            Margin="3"
+                            Command="{Binding RetrieveByCadisIdCommand}"
                             CommandParameter="{Binding Text, ElementName=CadisIdTextBox}"/>
+                    <Button Content="Retrieve"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="3"
+                            Command="{Binding RetrieveByYieldbookIdCommand}"
+                            CommandParameter="{Binding Text, ElementName=YieldbookIdTextBox}"/>
                 </Grid>
 
             </TabItem>
             
 
             <TabItem Header="By Run Date">
-                <Grid>
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -84,8 +91,8 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="130" Text="{Binding RunDate,  StringFormat={x:Static local:Formatter.DateTimeFormat}}" />
-                                    <TextBlock Width="130" Text="{Binding ValDate,  StringFormat={x:Static local:Formatter.DateFormat}}" />
+                                    <TextBlock Width="130" Text="{Binding RunDate,  StringFormat={x:Static local:Constants.DateTimeFormat}}" />
+                                    <TextBlock Width="130" Text="{Binding ValDate,  StringFormat={x:Static local:Constants.DateFormat}}" />
                                     <TextBlock  Text="{Binding Slot}" />
                                 </StackPanel>
                             </DataTemplate>
@@ -134,8 +141,10 @@
             </TabItem>
         </TabControl>
 
-        <DataGrid Grid.Row="3"
+        <DataGrid x:Name="RequestsDataGrid" 
+                  Grid.Row="3"
                   Grid.Column="0"
+                  AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
                   ItemsSource="{Binding Requests}"/>
 
         </Grid>
