@@ -1,19 +1,14 @@
 ﻿using AvDataAccess;
 using AvEntities;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AvViewModel
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged, IDisposable
     {
         public AvDataContext AvDataContext { get; set; }
 
@@ -34,7 +29,7 @@ namespace AvViewModel
         }
 
 
-        private bool _includePortfolio1;
+        private bool _includePortfolio1 = true;
         private bool _includePortfolio2;
         private bool _includePortfolio3;
         private bool _includePortfolio4;
@@ -54,7 +49,11 @@ namespace AvViewModel
         public bool IncludePortfolio2
         {
             get { return _includePortfolio2; }
-            set { _includePortfolio2 = value; }
+            set
+            {
+                _includePortfolio2 = value;
+                GetRequests();
+            }
         }
 
         public bool IncludePortfolio3
@@ -116,6 +115,9 @@ namespace AvViewModel
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        public void Dispose()
+        {
+            AvDataContext.Dispose();
+        }
     }
 }

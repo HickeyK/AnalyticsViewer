@@ -5,36 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyticsViewer"
         mc:Ignorable="d"
-        Title="YB Requests" Height="350" Width="525">
+        Title="YB Requests" Height="700" Width="1100" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0"
-               Grid.Column="0"
-               Content="Run Date"/>
-        <ComboBox x:Name="RunDateComboBox"
-                  Grid.Row="0"
-                  Grid.Column="1"
-                  ItemsSource="{Binding RequestGroups}"
-                  SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="140" Text="{Binding RunDate,  StringFormat={x:Static local:Formatter.DateTimeFormat}}" />
-                        <TextBlock Width="140" Text="{Binding ValDate,  StringFormat={x:Static local:Formatter.DateFormat}}" />
-                        <TextBlock  Text="{Binding Slot}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+
+        <TabControl>
+            <TabItem Header="By Run Date">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Content="Run Date"/>
+                    <ComboBox x:Name="RunDateComboBox"
+                              Grid.Row="0"
+                              Grid.Column="1"
+                              MinWidth="300"
+                              ItemsSource="{Binding RequestGroups}"
+                              SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="130" Text="{Binding RunDate,  StringFormat={x:Static local:Formatter.DateTimeFormat}}" />
+                                    <TextBlock Width="130" Text="{Binding ValDate,  StringFormat={x:Static local:Formatter.DateFormat}}" />
+                                    <TextBlock  Text="{Binding Slot}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
 
         <Grid Grid.Row="1"
               Grid.Column="0"
@@ -46,17 +64,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <RadioButton x:Name="IncludePortfolio1CheckBox"
                       IsChecked="{Binding IncludePortfolio1}"
                       Content="Portfolio 1"
                       GroupName="Portfolio"
+                      VerticalAlignment="Center"
                       Grid.Row="0"
                       Grid.Column="0"/>
             <RadioButton x:Name="IncludePortfolio2CheckBox"
                       Content="Portfolio 2"
                       GroupName="Portfolio"
+                      VerticalAlignment="Center"
                       IsChecked="{Binding IncludePortfolio2}"
                       Grid.Row="0"
                       Grid.Column="1"/>
@@ -64,6 +84,7 @@
             <RadioButton x:Name="IncludePortfolio3CheckBox"
                       Content="Portfolio 3"
                       GroupName="Portfolio"
+                      VerticalAlignment="Center"
                       IsChecked="{Binding IncludePortfolio3}"
                       Grid.Row="0"
                       Grid.Column="2"/>
@@ -71,17 +92,16 @@
             <RadioButton x:Name="IncludePortfolio4CheckBox"
                       Content="Portfolio 4"
                       GroupName="Portfolio"
+                      VerticalAlignment="Center"
                       IsChecked="{Binding IncludePortfolio4}"
                       Grid.Row="0"
                       Grid.Column="3"/>
 
         </Grid>
 
-        <DataGrid Grid.Row="2"
+        <DataGrid Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
-                  ItemsSource="{Binding Requests}">
-
-        </DataGrid>
+                  ItemsSource="{Binding Requests}"/>
     </Grid>
 </Window>

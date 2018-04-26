@@ -28,5 +28,14 @@ namespace AnalyticsViewer
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (DataContext !=null)
+            {
+                MainWindowViewModel vm =(MainWindowViewModel) DataContext;
+                vm.Dispose();
+            }
+        }
     }
 }
