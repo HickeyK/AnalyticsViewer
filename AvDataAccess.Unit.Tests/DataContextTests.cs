@@ -57,6 +57,21 @@ namespace AvDataAccess.Unit.Tests
             Assert.True(requests.Count > 0);
         }
 
+        [Fact]
+        public void Dc_ReturnsRequestsForCadisId()
+        {
+            // Arrange
+            int cadisId = 31;
+
+            // Act
+            var requests = AvDataContext.GetRequestsByCadisId(cadisId);
+
+            // Assert
+            Assert.IsType<List<StoreYbAnalyticReq>>(requests);
+            Assert.NotEmpty(requests);
+            Assert.True(requests.Count > 0);
+        }
+
 
     }
 }

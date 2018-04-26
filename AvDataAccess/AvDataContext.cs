@@ -74,6 +74,31 @@ namespace AvDataAccess
                 .ToList();
         }
 
+        public List<StoreYbAnalyticReq> GetRequestsByCadisId(int cadisId)
+        {
+            return this.StoreYbAnalyticReqs
+                .Where(r => r.CadisId == cadisId )
+                .Select
+                (r => new StoreYbAnalyticReq()
+                {
+                    RunDate = r.RunDate,
+                    ValDate = r.ValDate,
+                    CadisId = r.CadisId,
+                    Slot = r.Slot,
+                    YbYieldbookId = r.YbYieldbookId,
+                    PortfolioId = r.PortfolioId,
+                    UserBond = r.UserBond,
+                    ParAmt = r.ParAmt,
+                    PrepayModel = r.PrepayModel,
+                    PricingLevel = r.PricingLevel,
+                    OutputFile = r.OutputFile,
+                    OutputLine = r.OutputLine,
+                    OmittedFromSecondRun = r.OmittedFromSecondRun
+                })
+                .Distinct()
+                .OrderByDescending(r => r.RunDate)
+                .ToList();
+        }
 
     }
 }

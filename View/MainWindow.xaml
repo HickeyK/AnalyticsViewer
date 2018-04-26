@@ -19,6 +19,45 @@
         </Grid.RowDefinitions>
 
         <TabControl>
+
+            <TabItem Header="By Security">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Cadis Id"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="CadisIdTextBox"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Width="200"/>
+
+                    <Label Content="Yieldbook Id"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
+                    <TextBox x:Name="YieldbookIdTextBox"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Width="200"/>
+
+                    <Button Content="Retrieve"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Command="{Binding RetrieveByIdCommand}"
+                            CommandParameter="{Binding Text, ElementName=CadisIdTextBox}"/>
+                </Grid>
+
+            </TabItem>
+            
+
             <TabItem Header="By Run Date">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -28,14 +67,17 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0"
                            Grid.Column="0"
+                           Margin="3"
                            Content="Run Date"/>
                     <ComboBox x:Name="RunDateComboBox"
                               Grid.Row="0"
                               Grid.Column="1"
+                              Margin="3"
                               MinWidth="300"
                               ItemsSource="{Binding RequestGroups}"
                               SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
@@ -49,59 +91,52 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+
+                    <Button Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="3"
+                            Content="Retrieve"/>
+
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2">
+
+
+
+                        <RadioButton x:Name="IncludePortfolio1CheckBox"
+                                     IsChecked="{Binding IncludePortfolio1}"
+                                     Content="Portfolio 1"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                    Margin ="3"/>
+                        <RadioButton x:Name="IncludePortfolio2CheckBox"
+                                     Content="Portfolio 2"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                     Margin ="3"
+                                     IsChecked="{Binding IncludePortfolio2}"/>
+                        <RadioButton x:Name="IncludePortfolio3CheckBox"
+                                     Content="Portfolio 3"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                     Margin ="3"
+                                     IsChecked="{Binding IncludePortfolio3}"/>
+                        <RadioButton x:Name="IncludePortfolio4CheckBox"
+                                     Content="Portfolio 4"
+                                     GroupName="Portfolio"
+                                     Margin ="3"
+                                     VerticalAlignment="Center"
+                                     IsChecked="{Binding IncludePortfolio4}"/>
+
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
 
-
-        <Grid Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <RadioButton x:Name="IncludePortfolio1CheckBox"
-                      IsChecked="{Binding IncludePortfolio1}"
-                      Content="Portfolio 1"
-                      GroupName="Portfolio"
-                      VerticalAlignment="Center"
-                      Grid.Row="0"
-                      Grid.Column="0"/>
-            <RadioButton x:Name="IncludePortfolio2CheckBox"
-                      Content="Portfolio 2"
-                      GroupName="Portfolio"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding IncludePortfolio2}"
-                      Grid.Row="0"
-                      Grid.Column="1"/>
-
-            <RadioButton x:Name="IncludePortfolio3CheckBox"
-                      Content="Portfolio 3"
-                      GroupName="Portfolio"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding IncludePortfolio3}"
-                      Grid.Row="0"
-                      Grid.Column="2"/>
-
-            <RadioButton x:Name="IncludePortfolio4CheckBox"
-                      Content="Portfolio 4"
-                      GroupName="Portfolio"
-                      VerticalAlignment="Center"
-                      IsChecked="{Binding IncludePortfolio4}"
-                      Grid.Row="0"
-                      Grid.Column="3"/>
-
-        </Grid>
-
         <DataGrid Grid.Row="3"
                   Grid.Column="0"
-                  Grid.ColumnSpan="2"
                   ItemsSource="{Binding Requests}"/>
-    </Grid>
+
+        </Grid>
 </Window>
