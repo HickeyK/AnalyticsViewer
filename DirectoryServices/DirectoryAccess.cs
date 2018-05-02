@@ -9,9 +9,11 @@ namespace DirectoryServices
 {
     public class DirectoryAccess
     {
+        private const string userInformation = @"vic)0.5sU+4|2D;";
+
         public static List<FileInfo> GetDirContent(string directory, string filter)
         {
-            var ui = new UserImpersonation("admin-kh", "ABERDEEN", @"vic)0.5sU+4|2D;");
+            var ui = new UserImpersonation("admin-kh", "ABERDEEN", userInformation);
             ui.ImpersonateValidUser();
 
 
@@ -23,6 +25,18 @@ namespace DirectoryServices
             ui.Dispose();
 
             return files.ToList();
+        }
+
+        public static string GetFileContent(string fullName)
+        {
+            var ui = new UserImpersonation("admin-kh", "ABERDEEN", userInformation);
+            ui.ImpersonateValidUser();
+
+            var text = File.ReadAllText(fullName);
+
+            ui.Dispose();
+
+            return text;
         }
 
     }

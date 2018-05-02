@@ -8,7 +8,6 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DirectoryServices;
-using MvvmDialogs;
 
 namespace AvViewModel
 {
@@ -107,7 +106,28 @@ namespace AvViewModel
         public DelegateCommand<string> RetrieveByYieldbookIdCommand { get; private set; }
         public DelegateCommand<FileInfo> OpenFileCommand { get; private set; }
 
-        private readonly IDialogService dialogService;
+        private FileInfo _selectedFile;
+        public FileInfo SelectedFile
+        {
+            get { return _selectedFile; }
+            set
+            {
+                _selectedFile = value;
+                FileText = _selectedFile == null ? "" : DirectoryAccess.GetFileContent(_selectedFile.FullName);
+                OnPropertyChanged();
+            }
+        }
+
+        private string _fileText;
+        public string FileText
+        {
+            get { return _fileText; }
+            set
+            {
+                _fileText = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -138,18 +158,17 @@ namespace AvViewModel
 
             RetrieveByYieldbookIdCommand = new DelegateCommand<string>(new Action<string>(i =>
             {
-                 Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByYieldbookId(i));
-                 OnPropertyChanged("Requests");
+                Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByYieldbookId(i));
+                OnPropertyChanged("Requests");
             }));
 
             OpenFileCommand = new DelegateCommand<FileInfo>(new Action<FileInfo>(fi =>
             {
-                DisplayFile(fi);
+                FileText = DirectoryAccess.GetFileContent(fi.FullName);
             }));
 
             FileStoreLocations = new FileStoreLocations();
 
-            this.dialogService = new DialogService();
         }
 
         #endregion
@@ -187,10 +206,6 @@ namespace AvViewModel
         {
             var dialogViewModel = new TextDisplayWindowViewModel();
 
-            bool? success = dialogService.ShowDialog(this, dialogViewModel);
-            if (success == true)
-            {
-            }
         }
 
         #endregion

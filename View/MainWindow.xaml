@@ -162,6 +162,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -192,7 +193,9 @@
                               Grid.Column="0"
                               Grid.ColumnSpan="2"
                               AutoGenerateColumns="False"
-                              ItemsSource="{Binding Files}" IsReadOnly="True">
+                              IsReadOnly="True"
+                              ItemsSource="{Binding Files}" 
+                              SelectedItem="{Binding SelectedFile}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
                                                 Width="*"
@@ -212,6 +215,14 @@
                         </DataGrid.InputBindings>
 
                     </DataGrid>
+                    
+                    <TextBox x:Name="FileContextTextBox"
+                             Grid.Row="2"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2"
+                             Text="{Binding FileText}" 
+                             HorizontalScrollBarVisibility="Auto" 
+                             VerticalScrollBarVisibility="Auto"/>
 
                 </Grid>
 

@@ -6,7 +6,6 @@
         xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
         xmlns:local="clr-namespace:AnalyticsViewer"
         mc:Ignorable="d"
-        md:DialogServiceViews.IsRegistered="True"
         Title="Text Display Window" Height="500" Width="800">
     <Grid>
         <TextBox x:Name="TextDisplayTextBox" />
