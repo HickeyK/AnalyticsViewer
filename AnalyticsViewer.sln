@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvDataAccess.Unit.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvViewModel", "AvViewModel\AvViewModel.csproj", "{DE200DA6-DF73-4520-BE79-D6009A51FAD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryServices", "DirectoryServices\DirectoryServices.csproj", "{B8960B68-F7F6-4F7C-A34A-6F0AFE4B541B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryServices.Unit.Tests", "DirectoryServices.Unit.Tests\DirectoryServices.Unit.Tests.csproj", "{B3E8772A-55AD-4F21-96C7-3D9A6F541F59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{DE200DA6-DF73-4520-BE79-D6009A51FAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE200DA6-DF73-4520-BE79-D6009A51FAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE200DA6-DF73-4520-BE79-D6009A51FAD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8960B68-F7F6-4F7C-A34A-6F0AFE4B541B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8960B68-F7F6-4F7C-A34A-6F0AFE4B541B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8960B68-F7F6-4F7C-A34A-6F0AFE4B541B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8960B68-F7F6-4F7C-A34A-6F0AFE4B541B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3E8772A-55AD-4F21-96C7-3D9A6F541F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3E8772A-55AD-4F21-96C7-3D9A6F541F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3E8772A-55AD-4F21-96C7-3D9A6F541F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3E8772A-55AD-4F21-96C7-3D9A6F541F59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

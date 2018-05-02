@@ -17,13 +17,13 @@ namespace AvDataAccess
             Boolean objectTrackingEnabled,
             int commandTimeout) : base(connectionString, mappingSource)
         {
-            var x = new AvEntities.StoreYbAnalyticReq();
-
             base.ObjectTrackingEnabled = ObjectTrackingEnabled;
             base.CommandTimeout = commandTimeout;
         }
 
         public Table<StoreYbAnalyticReq> StoreYbAnalyticReqs;
+
+        public Table<StoreInYbAnalytic> StoreInYbAnalytic;
 
         public List<DateTime> RunDateList()
         {
@@ -145,7 +145,20 @@ namespace AvDataAccess
                 OutputFile = r.OutputFile,
                 OutputLine = r.OutputLine,
                 OmittedFromSecondRun = r.OmittedFromSecondRun
-            }
+            };
+        }
+
+
+        private StoreInYbAnalytic CreateStoreInYbAnalytic(StoreInYbAnalytic r)
+        {
+            return new StoreInYbAnalytic()
+            {
+                RunDate = r.RunDate,
+                PortfolioId = r.PortfolioId,
+                Cusip = r.Cusip,
+                Isin = r.Isin,
+
+            };
         }
 
     }

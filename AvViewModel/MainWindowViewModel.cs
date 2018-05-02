@@ -4,14 +4,23 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using DirectoryServices;
+using MvvmDialogs;
 
 namespace AvViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged, IDisposable
     {
+
+        #region Properties
+
+
         public AvDataContext AvDataContext { get; set; }
+
+        public FileStoreLocations FileStoreLocations { get; set; }
 
         public ObservableCollection<DateTime> RunDates { get; set; }
 
@@ -29,13 +38,24 @@ namespace AvViewModel
             }
         }
 
+        private FileStoreLocation _selectedFileStoreLocation;
+
+        public FileStoreLocation SelectedFileStoreLocation
+        {
+            get { return _selectedFileStoreLocation; }
+            set
+            {
+                _selectedFileStoreLocation = value;
+                GetFiles();
+            }
+        }
+
+
 
         private bool _includePortfolio1 = true;
         private bool _includePortfolio2;
         private bool _includePortfolio3;
         private bool _includePortfolio4;
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public bool IncludePortfolio1
         {
@@ -77,11 +97,22 @@ namespace AvViewModel
             }
         }
 
+
         public ObservableCollection<StoreYbAnalyticReq> Requests { get; set; }
 
-        public ICommand RetrieveByIdCommand { get; private set; }
+        public ObservableCollection<FileInfo> Files { get; set; }
+
+        //public ICommand RetrieveByIdCommand { get; private set; }
         public DelegateCommand<string> RetrieveByCadisIdCommand { get; private set; }
         public DelegateCommand<string> RetrieveByYieldbookIdCommand { get; private set; }
+        public DelegateCommand<FileInfo> OpenFileCommand { get; private set; }
+
+        private readonly IDialogService dialogService;
+
+        #endregion
+
+
+        #region Constructor
 
         public MainWindowViewModel()
         {
@@ -111,7 +142,20 @@ namespace AvViewModel
                  OnPropertyChanged("Requests");
             }));
 
+            OpenFileCommand = new DelegateCommand<FileInfo>(new Action<FileInfo>(fi =>
+            {
+                DisplayFile(fi);
+            }));
+
+            FileStoreLocations = new FileStoreLocations();
+
+            this.dialogService = new DialogService();
         }
+
+        #endregion
+
+
+        #region Methods
 
         private void GetRequests()
         {
@@ -132,14 +176,40 @@ namespace AvViewModel
             OnPropertyChanged("Requests");
         }
 
+        private void GetFiles()
+        {
+            Files = new ObservableCollection<FileInfo>(
+                DirectoryAccess.GetDirContent(SelectedFileStoreLocation.Location, SelectedFileStoreLocation.Filter));
+            OnPropertyChanged("Files");
+        }
+
+        private void DisplayFile(FileInfo fi)
+        {
+            var dialogViewModel = new TextDisplayWindowViewModel();
+
+            bool? success = dialogService.ShowDialog(this, dialogViewModel);
+            if (success == true)
+            {
+            }
+        }
+
+        #endregion
+
+
+        #region Event Handling
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
 
         public void Dispose()
         {
             AvDataContext.Dispose();
         }
     }
+
 }

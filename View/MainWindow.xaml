@@ -11,9 +11,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -25,11 +22,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Cadis Id"
@@ -60,7 +59,15 @@
                             Margin="3"
                             Command="{Binding RetrieveByYieldbookIdCommand}"
                             CommandParameter="{Binding Text, ElementName=YieldbookIdTextBox}"/>
-                </Grid>
+
+                    <DataGrid x:Name="RequestsDataGridSec" 
+                              Grid.Row="2"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="4"
+                              AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
+                              ItemsSource="{Binding Requests}"/>
+
+</Grid>
 
             </TabItem>
             
@@ -70,11 +77,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0"
@@ -137,15 +146,77 @@
                                      IsChecked="{Binding IncludePortfolio4}"/>
 
                     </StackPanel>
+
+                    <DataGrid x:Name="RequestsDataGrid" 
+                              Grid.Row="2"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="4"
+                              AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
+                              ItemsSource="{Binding Requests}"/>
+
                 </Grid>
             </TabItem>
-        </TabControl>
 
-        <DataGrid x:Name="RequestsDataGrid" 
-                  Grid.Row="3"
-                  Grid.Column="0"
-                  AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
-                  ItemsSource="{Binding Requests}"/>
+            <TabItem Header="Log Files">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="File Archives"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        ItemsSource="{Binding FileStoreLocations.Locations}"
+                        SelectedItem="{Binding SelectedFileStoreLocation}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="130" Text="{Binding Environment }" />
+                                    <TextBlock Width="130" Text="{Binding StoreId}" />
+                                    <TextBlock  Width="400" Text="{Binding Location}" />
+                                    <TextBlock  Width="50" Text="{Binding Filter}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <DataGrid x:Name="FilesDataGrid" 
+                              Grid.Row="1"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Files}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                                Width="*"
+                                                Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Length"
+                                                Binding="{Binding Length}" />
+                            <DataGridTextColumn Header="Last Updated"
+                                                Binding="{Binding LastWriteTime, StringFormat={x:Static local:Constants.DateTimeFormat}}" />
+
+                        </DataGrid.Columns>
+
+                        <DataGrid.InputBindings>
+                            <MouseBinding 
+                                MouseAction="LeftDoubleClick"
+                                Command="{Binding OpenFileCommand}"
+                                CommandParameter="{Binding Path=SelectedItem, ElementName=FilesDataGrid }" />
+                        </DataGrid.InputBindings>
+
+                    </DataGrid>
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
 
         </Grid>
 </Window>
