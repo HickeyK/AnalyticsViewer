@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AnalyticsViewer
 {
     /// <summary>
-    /// Interaction logic for TextDisplayWindow.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class TextDisplayWindow : Window
+    public partial class UserControl1 : UserControl
     {
-        public TextDisplayWindow()
+        public UserControl1()
         {
             InitializeComponent();
         }

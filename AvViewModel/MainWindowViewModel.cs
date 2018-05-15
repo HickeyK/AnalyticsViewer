@@ -146,6 +146,8 @@ namespace AvViewModel
 
             RequestGroups = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.RequestGroup());
 
+            FileStoreLocations = FileStorageLocations.Create();
+
 
             RetrieveByCadisIdCommand = new DelegateCommand<string>(new Action<string>(i =>
                 {
@@ -168,9 +170,14 @@ namespace AvViewModel
             OpenFileCommand = new DelegateCommand<FileInfo>(new Action<FileInfo>(fi =>
             {
                 FileText = DirectoryAccess.GetFileContent(fi.FullName);
+
+                this.OnDisplayPopupWindow(FileText);
+                OnPropertyChanged("FileText");
+                
             }));
 
-            FileStoreLocations = FileStorageLocations.Create();
+
+
 
         }
 
@@ -209,6 +216,7 @@ namespace AvViewModel
         {
             var dialogViewModel = new TextDisplayWindowViewModel();
 
+
         }
 
         #endregion
@@ -220,6 +228,15 @@ namespace AvViewModel
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        // Main Window will subscribe and open popup when event fires
+        public event EventHandler<PopupMessageEventArgs> DisplayPopupWindow = delegate { };
+
+        protected virtual void OnDisplayPopupWindow(string message)
+        {
+            DisplayPopupWindow.Invoke(this, new PopupMessageEventArgs(message));
         }
 
         #endregion

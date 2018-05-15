@@ -1,5 +1,6 @@
 ﻿using AvViewModel;
 using System;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,11 +12,16 @@ namespace AnalyticsViewer
     public partial class MainWindow : Window
     {
 
+        private readonly MainWindowViewModel mvm;
         
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            mvm = new MainWindowViewModel();
+            this.DataContext = mvm;
+
+            mvm.DisplayPopupWindow += DisplayPopupWindow;
+
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -33,6 +39,22 @@ namespace AnalyticsViewer
             {
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyy";
             }
+        }
+
+        private void DisplayPopupWindow(object sender, EventArgs e)
+        {
+            PopupWindow popupWin = new PopupWindow {Owner = this};
+
+
+            var textDisplayUserControl = new TextDisplayUserControl();
+            popupWin.DataContext = mvm;
+            //popupWin.PopupUserControl = textDisplayUserControl;
+            popupWin.TestDisplayUserControl.DataContext = mvm;
+
+
+            popupWin.Show();
+            
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="AnalyticsViewer.TextDisplayWindow"
+﻿<Window x:Class="AnalyticsViewer.PopupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="Text Display Window" Height="500" Width="800">
     <Grid>
-        <TextBox x:Name="TextDisplayTextBox" />
+        <!--<UserControl x:Name="PopupUserControl"/>-->
+        <local:TextDisplayUserControl x:Name ="TestDisplayUserControl"/>
     </Grid>
 </Window>
