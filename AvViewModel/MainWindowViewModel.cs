@@ -19,7 +19,7 @@ namespace AvViewModel
 
         public AvDataContext AvDataContext { get; set; }
 
-        public FileStoreLocations FileStoreLocations { get; set; }
+        public FileStorageLocations FileStoreLocations { get; set; }
 
         public ObservableCollection<DateTime> RunDates { get; set; }
 
@@ -146,6 +146,7 @@ namespace AvViewModel
 
             RequestGroups = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.RequestGroup());
 
+
             RetrieveByCadisIdCommand = new DelegateCommand<string>(new Action<string>(i =>
                 {
                     int cadisId;
@@ -156,18 +157,20 @@ namespace AvViewModel
                     }
                 }));
 
+
             RetrieveByYieldbookIdCommand = new DelegateCommand<string>(new Action<string>(i =>
             {
                 Requests = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.GetRequestsByYieldbookId(i));
                 OnPropertyChanged("Requests");
             }));
 
+
             OpenFileCommand = new DelegateCommand<FileInfo>(new Action<FileInfo>(fi =>
             {
                 FileText = DirectoryAccess.GetFileContent(fi.FullName);
             }));
 
-            FileStoreLocations = new FileStoreLocations();
+            FileStoreLocations = FileStorageLocations.Create();
 
         }
 

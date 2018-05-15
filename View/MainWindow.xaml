@@ -180,9 +180,9 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Width="130" Text="{Binding Environment }" />
-                                    <TextBlock Width="130" Text="{Binding StoreId}" />
-                                    <TextBlock  Width="400" Text="{Binding Location}" />
-                                    <TextBlock  Width="50" Text="{Binding Filter}" />
+                                    <TextBlock Width="500" Text="{Binding StoreDescription}" />
+                                    <TextBlock  Width="500" Text="{Binding Location}" />
+                                    <TextBlock  Width="100" Text="{Binding Filter}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>

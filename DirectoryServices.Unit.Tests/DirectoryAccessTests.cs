@@ -30,7 +30,7 @@ namespace DirectoryServices.Unit.Tests
         public void da_finds_files()
         {
             // arrange
-            var fileStoreLocations = new FileStoreLocations();
+            var fileStoreLocations = new FileStorageLocations();
             var fileStoreLocation = fileStoreLocations.Locations.First();
 
             // act

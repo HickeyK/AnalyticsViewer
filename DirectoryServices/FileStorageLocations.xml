@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FileStorageLocations>  
+
+  <FileStore>
+    <Environment>E2E</Environment>
+    <Location>\\LONBSCADSQLEE01\E$\CADIS\Jobs\YieldBookAnalytic\Data\Archive</Location>
+    <Description>Output from the Yield Book batch, .out, .ref</Description>
+    <Filter>AAMPORT*</Filter>
+  </FileStore>
+
+  <FileStore>
+    <Environment>PRD</Environment>
+    <Location>\\CADDBPRD01\E$\CADIS\Jobs\YieldBookAnalytic\Data\Archive</Location>
+    <Description>Output from the Yield Book batch, .out, .ref</Description>
+    <Filter>AMPORT*</Filter>
+  </FileStore>
+
+  <FileStore>
+    <Environment>PRD</Environment>
+    <Location>\\CADDBPRD01\E$\CADIS\Jobs\YieldBookUserBonds\Logs</Location>
+    <Description>YB UB Log", "Output from the Yield Book User  Bond batch, .out, .ref</Description>
+    <Filter>*</Filter>
+  </FileStore>
+
+  <FileStore>
+    <Environment>PRD</Environment>
+    <Location>\\CADDBPRD01\E$\CADIS\Jobs\YieldBookUserBonds\Data\Archive</Location>
+    <Description>YB UB Upload", "User Bond upload file, .txt</Description>
+    <Filter>USERBOND*</Filter>
+  </FileStore>
+
+</FileStorageLocations>

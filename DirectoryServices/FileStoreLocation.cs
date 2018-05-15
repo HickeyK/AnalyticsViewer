@@ -3,26 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace DirectoryServices
 {
     public class FileStoreLocation
     {
+        [XmlElement("Environment")]
         public Environment Environment { get; set; }
-        public string StoreId { get; set; }
-        public string StoreDescription { get; set; }
+
+        [XmlElement("Location")]
         public string Location { get; set; }
+
+        [XmlElement("Description")]
+        public string StoreDescription { get; set; }
+
+        [XmlElement("Filter")]
         public string Filter { get; set; }
+
+        public FileStoreLocation() {}
 
         public FileStoreLocation(
             Environment environment,
-            string storeId,
             string storeDesc,
             string location,
             string filter)
         {
             Environment = environment;
-            StoreId = storeId;
             StoreDescription = storeDesc;
             Location = location;
             Filter = filter;
