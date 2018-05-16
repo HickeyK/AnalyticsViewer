@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
         xmlns:local="clr-namespace:AnalyticsViewer"
+        xmlns:vm="clr-namespace:AvViewModel;assembly=AvViewModel"
         mc:Ignorable="d"
         Title="Text Display Window" Height="500" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:TextDisplayWindowViewModel}">
+            <local:TextDisplayUserControl/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <!--<UserControl x:Name="PopupUserControl"/>-->
-        <local:TextDisplayUserControl x:Name ="TestDisplayUserControl"/>
+        <!--<local:TextDisplayUserControl x:Name ="TestDisplayUserControl"/>-->
+        <!--<ContentControl Content="{Binding ContentWindow}"/>-->
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

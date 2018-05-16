@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AvViewModel
 {
-    public class PopupMessageEventArgs : EventArgs
+    public class PopupWindowEventArgs : EventArgs
     {
-        public string Message { get; set; }
+        public object ViewModel { get; set; }
 
-        public PopupMessageEventArgs(string message)
+        public PopupWindowEventArgs(object vm)
         {
-            Message = message;
+            ViewModel = vm;
         }
     }
 }

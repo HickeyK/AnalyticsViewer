@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 using DirectoryServices;
 
@@ -129,6 +130,19 @@ namespace AvViewModel
             }
         }
 
+        private UserControl _content;
+
+        public UserControl ContentWindow
+        {
+            get { return _content; }
+            set
+            {
+                _content = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         #endregion
 
 
@@ -232,11 +246,12 @@ namespace AvViewModel
 
 
         // Main Window will subscribe and open popup when event fires
-        public event EventHandler<PopupMessageEventArgs> DisplayPopupWindow = delegate { };
+        public event EventHandler<PopupWindowEventArgs> DisplayPopupWindow = delegate { };
 
         protected virtual void OnDisplayPopupWindow(string message)
         {
-            DisplayPopupWindow.Invoke(this, new PopupMessageEventArgs(message));
+            var vm = new TextDisplayWindowViewModel {Text = message};
+            DisplayPopupWindow.Invoke(this, new PopupWindowEventArgs(vm));
         }
 
         #endregion

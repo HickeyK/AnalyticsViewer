@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PopupService.cs" />
     <Compile Include="TextDisplayUserControl.xaml.cs">
       <DependentUpon>TextDisplayUserControl.xaml</DependentUpon>
     </Compile>

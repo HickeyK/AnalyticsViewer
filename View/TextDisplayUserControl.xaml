@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Border BorderThickness="2" BorderBrush="Blue">
-            <TextBox Text="{Binding FileText}"
+            <TextBox Text="{Binding Text}"
                      HorizontalScrollBarVisibility="Auto"
                      VerticalScrollBarVisibility="Auto" FontSize="10"
                      />

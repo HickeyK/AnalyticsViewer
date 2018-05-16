@@ -9,7 +9,7 @@ namespace DirectoryServices
 {
     public class DirectoryAccess
     {
-        private const string userInformation = @"*2EVSrPhDtk;QWI";
+        private const string userInformation = @"ms1n|5xTLA7]38h";
 
         public static List<FileInfo> GetDirContent(string directory, string filter)
         {

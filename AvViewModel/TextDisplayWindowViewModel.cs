@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
 
 namespace AvViewModel
 {
-    class TextDisplayWindowViewModel 
+    public class TextDisplayWindowViewModel 
     {
+        public string Text { get; set; }
 
+        public object CurrentViewModel
+        {
+            get { return this; }
+        }
     }
 }

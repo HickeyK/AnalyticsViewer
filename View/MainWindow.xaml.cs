@@ -13,7 +13,7 @@ namespace AnalyticsViewer
     {
 
         private readonly MainWindowViewModel mvm;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,9 +26,9 @@ namespace AnalyticsViewer
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (DataContext !=null)
+            if (DataContext != null)
             {
-                MainWindowViewModel vm =(MainWindowViewModel) DataContext;
+                MainWindowViewModel vm = (MainWindowViewModel)DataContext;
                 vm.Dispose();
             }
         }
@@ -41,20 +41,18 @@ namespace AnalyticsViewer
             }
         }
 
-        private void DisplayPopupWindow(object sender, EventArgs e)
+        private void DisplayPopupWindow(object sender, PopupWindowEventArgs e)
         {
-            PopupWindow popupWin = new PopupWindow {Owner = this};
+            if (e.ViewModel == null) return;
 
-
-            var textDisplayUserControl = new TextDisplayUserControl();
-            popupWin.DataContext = mvm;
-            //popupWin.PopupUserControl = textDisplayUserControl;
-            popupWin.TestDisplayUserControl.DataContext = mvm;
-
+            PopupWindow popupWin = new PopupWindow
+            {
+                Owner = this,
+                DataContext = e.ViewModel
+            };
 
             popupWin.Show();
-            
-
         }
+
     }
 }
