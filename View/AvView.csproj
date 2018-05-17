@@ -55,13 +55,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LogFileView.xaml.cs">
+      <DependentUpon>LogFileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PopupService.cs" />
+    <Compile Include="RequestByRunDateView.xaml.cs">
+      <DependentUpon>RequestByRunDateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RequestBySecurityView.xaml.cs">
+      <DependentUpon>RequestBySecurityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextDisplayUserControl.xaml.cs">
       <DependentUpon>TextDisplayUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="LogFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +88,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RequestByRunDateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RequestBySecurityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TextDisplayUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

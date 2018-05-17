@@ -17,217 +17,25 @@
 
         <TabControl>
 
-            <TabItem Header="By Security">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <TabItem Header="Log Files">
+                <local:LogFileView/>
+            </TabItem>
 
-                    <Label Content="Cadis Id"
-                           Grid.Row="0"
-                           Grid.Column="0"/>
-                    <TextBox x:Name="CadisIdTextBox"
-                             Grid.Row="0"
-                             Grid.Column="1"
-                             Width="200"/>
 
-                    <Label Content="Yieldbook Id"
-                           Grid.Row="1"
-                           Grid.Column="0"/>
-                    <TextBox x:Name="YieldbookIdTextBox"
-                             Grid.Row="1"
-                             Grid.Column="1"
-                             Width="200"/>
-
-                    <Button Content="Retrieve"
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            Margin="3"
-                            Command="{Binding RetrieveByCadisIdCommand}"
-                            CommandParameter="{Binding Text, ElementName=CadisIdTextBox}"/>
-                    <Button Content="Retrieve"
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Margin="3"
-                            Command="{Binding RetrieveByYieldbookIdCommand}"
-                            CommandParameter="{Binding Text, ElementName=YieldbookIdTextBox}"/>
-
-                    <DataGrid x:Name="RequestsDataGridSec" 
-                              Grid.Row="2"
-                              Grid.Column="0"
-                              Grid.ColumnSpan="4"
-                              AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
-                              ItemsSource="{Binding Requests}"/>
-
-</Grid>
+            <TabItem Header="AdHoc Queries">
 
             </TabItem>
-            
 
             <TabItem Header="By Run Date">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Margin="3"
-                           Content="Run Date"/>
-                    <ComboBox x:Name="RunDateComboBox"
-                              Grid.Row="0"
-                              Grid.Column="1"
-                              Margin="3"
-                              MinWidth="300"
-                              ItemsSource="{Binding RequestGroups}"
-                              SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="130" Text="{Binding RunDate,  StringFormat={x:Static local:Constants.DateTimeFormat}}" />
-                                    <TextBlock Width="130" Text="{Binding ValDate,  StringFormat={x:Static local:Constants.DateFormat}}" />
-                                    <TextBlock  Text="{Binding Slot}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-
-                    <Button Grid.Row="0"
-                            Grid.Column="2"
-                            Margin="3"
-                            Content="Retrieve"/>
-
-
-                    <StackPanel Grid.Row="1"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="2">
-
-
-
-                        <RadioButton x:Name="IncludePortfolio1CheckBox"
-                                     IsChecked="{Binding IncludePortfolio1}"
-                                     Content="Portfolio 1"
-                                     GroupName="Portfolio"
-                                     VerticalAlignment="Center"
-                                    Margin ="3"/>
-                        <RadioButton x:Name="IncludePortfolio2CheckBox"
-                                     Content="Portfolio 2"
-                                     GroupName="Portfolio"
-                                     VerticalAlignment="Center"
-                                     Margin ="3"
-                                     IsChecked="{Binding IncludePortfolio2}"/>
-                        <RadioButton x:Name="IncludePortfolio3CheckBox"
-                                     Content="Portfolio 3"
-                                     GroupName="Portfolio"
-                                     VerticalAlignment="Center"
-                                     Margin ="3"
-                                     IsChecked="{Binding IncludePortfolio3}"/>
-                        <RadioButton x:Name="IncludePortfolio4CheckBox"
-                                     Content="Portfolio 4"
-                                     GroupName="Portfolio"
-                                     Margin ="3"
-                                     VerticalAlignment="Center"
-                                     IsChecked="{Binding IncludePortfolio4}"/>
-
-                    </StackPanel>
-
-                    <DataGrid x:Name="RequestsDataGrid" 
-                              Grid.Row="2"
-                              Grid.Column="0"
-                              Grid.ColumnSpan="4"
-                              AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
-                              ItemsSource="{Binding Requests}"/>
-
-                </Grid>
+                <local:RequestByRunDateView/>
             </TabItem>
 
-            <TabItem Header="Log Files">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="File Archives"
-                           Grid.Row="0"
-                           Grid.Column="0"/>
-                    <ComboBox
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        ItemsSource="{Binding FileStoreLocations.Locations}"
-                        SelectedItem="{Binding SelectedFileStoreLocation}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="130" Text="{Binding Environment }" />
-                                    <TextBlock Width="500" Text="{Binding StoreDescription}" />
-                                    <TextBlock  Width="500" Text="{Binding Location}" />
-                                    <TextBlock  Width="100" Text="{Binding Filter}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
 
-                    <DataGrid x:Name="FilesDataGrid" 
-                              Grid.Row="1"
-                              Grid.Column="0"
-                              Grid.ColumnSpan="2"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              ItemsSource="{Binding Files}" 
-                              SelectedItem="{Binding SelectedFile}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name"
-                                                Width="*"
-                                                Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Length"
-                                                Binding="{Binding Length}" />
-                            <DataGridTextColumn Header="Last Updated"
-                                                Binding="{Binding LastWriteTime, StringFormat={x:Static local:Constants.DateTimeFormat}}" />
-
-                        </DataGrid.Columns>
-
-                        <DataGrid.InputBindings>
-                            <MouseBinding 
-                                MouseAction="LeftDoubleClick"
-                                Command="{Binding OpenFileCommand}"
-                                CommandParameter="{Binding Path=SelectedItem, ElementName=FilesDataGrid }" />
-                        </DataGrid.InputBindings>
-
-                    </DataGrid>
-                    
-                    <TextBox x:Name="FileContextTextBox"
-                             Grid.Row="2"
-                             Grid.Column="0"
-                             Grid.ColumnSpan="2"
-                             Text="{Binding FileText}" 
-                             HorizontalScrollBarVisibility="Auto" 
-                             VerticalScrollBarVisibility="Auto"/>
-
-                </Grid>
-
+            <TabItem Header="By Security">
+                <local:RequestBySecurityView/>
             </TabItem>
+
         </TabControl>
 
-        </Grid>
+    </Grid>
 </Window>

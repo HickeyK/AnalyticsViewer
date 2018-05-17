@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdHocQueriesTests.cs" />
     <Compile Include="DatabaseFixture.cs" />
     <Compile Include="DataContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DirectoryServices
 {
     public class DirectoryAccess
     {
-        private const string userInformation = @"ms1n|5xTLA7]38h";
+        private const string userInformation = @"T$hs4Q|/f*P:?@J";
 
         public static List<FileInfo> GetDirContent(string directory, string filter)
         {

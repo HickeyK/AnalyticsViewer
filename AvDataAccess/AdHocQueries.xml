@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AdHocQueries>  
+
+  <AdHocQuery>
+    <ConnectionString>Data Source=lonbscadsqlbl01;Initial Catalog=CADIS_E2E01;Integrated Security=True</ConnectionString>
+    <Description>Sample Query 1</Description>
+    <Sql>select top 10 sec_id, sec_name from t_master_aam_sec</Sql>
+  </AdHocQuery>
+
+
+</AdHocQueries>

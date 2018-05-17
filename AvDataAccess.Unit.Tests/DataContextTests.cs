@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
-using System.Linq;
-using AvDataAccess;
-using Moq;
 using Xunit;
-using System.Reflection;
 using AvEntities;
 
 namespace AvDataAccess.Unit.Tests

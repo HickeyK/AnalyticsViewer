@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="AnalyticsViewer.RequestByRunDateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AnalyticsViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="3"
+                           Content="Run Date"/>
+        <ComboBox x:Name="RunDateComboBox"
+                              Grid.Row="0"
+                              Grid.Column="1"
+                              Margin="3"
+                              MinWidth="300"
+                              ItemsSource="{Binding RequestGroups}"
+                              SelectedItem="{Binding SelectedRequestGroup, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="130" Text="{Binding RunDate,  StringFormat={x:Static local:Constants.DateTimeFormat}}" />
+                        <TextBlock Width="130" Text="{Binding ValDate,  StringFormat={x:Static local:Constants.DateFormat}}" />
+                        <TextBlock  Text="{Binding Slot}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="3"
+                            Content="Retrieve"/>
+
+
+        <StackPanel Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2">
+
+
+
+            <RadioButton x:Name="IncludePortfolio1CheckBox"
+                                     IsChecked="{Binding IncludePortfolio1}"
+                                     Content="Portfolio 1"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                    Margin ="3"/>
+            <RadioButton x:Name="IncludePortfolio2CheckBox"
+                                     Content="Portfolio 2"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                     Margin ="3"
+                                     IsChecked="{Binding IncludePortfolio2}"/>
+            <RadioButton x:Name="IncludePortfolio3CheckBox"
+                                     Content="Portfolio 3"
+                                     GroupName="Portfolio"
+                                     VerticalAlignment="Center"
+                                     Margin ="3"
+                                     IsChecked="{Binding IncludePortfolio3}"/>
+            <RadioButton x:Name="IncludePortfolio4CheckBox"
+                                     Content="Portfolio 4"
+                                     GroupName="Portfolio"
+                                     Margin ="3"
+                                     VerticalAlignment="Center"
+                                     IsChecked="{Binding IncludePortfolio4}"/>
+
+        </StackPanel>
+
+        <DataGrid x:Name="RequestsDataGrid" 
+                              Grid.Row="2"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="4"
+                              AutoGeneratingColumn="RequestsDataGrid_OnAutoGeneratingColumn"
+                              ItemsSource="{Binding Requests}"/>
+
+    </Grid>
+
+</UserControl>
