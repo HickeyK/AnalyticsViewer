@@ -114,6 +114,13 @@ namespace AvViewModel
             set
             {
                 _selectedFile = value;
+
+                if (DirectoryAccess.Password == null)
+                {
+                    this.InputBox.RequestPassword();
+
+                }
+
                 FileText = _selectedFile == null ? "" : DirectoryAccess.GetFileContent(_selectedFile.FullName);
                 OnPropertyChanged();
             }
@@ -140,6 +147,14 @@ namespace AvViewModel
                 _content = value;
                 OnPropertyChanged();
             }
+        }
+
+        private IInputBox _inputBox;
+
+        public IInputBox InputBox
+        {
+            get { return _inputBox; }
+            set { _inputBox = value; }
         }
 
 
@@ -221,6 +236,17 @@ namespace AvViewModel
 
         private void GetFiles()
         {
+            if (DirectoryAccess.Password == null)
+            {
+                var pw = this.InputBox.RequestPassword();
+                if (pw == null)
+                {
+                    return;
+                }
+                DirectoryAccess.Password = pw;
+            }
+
+
             Files = new ObservableCollection<FileInfo>(
                 DirectoryAccess.GetDirContent(SelectedFileStoreLocation.Location, SelectedFileStoreLocation.Filter));
             OnPropertyChanged("Files");

@@ -18,6 +18,8 @@ namespace AnalyticsViewer
         {
             InitializeComponent();
             mvm = new MainWindowViewModel();
+            mvm.InputBox = new InputBoxProvider();
+
             this.DataContext = mvm;
 
             mvm.DisplayPopupWindow += DisplayPopupWindow;
