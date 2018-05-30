@@ -14,9 +14,6 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <!--<UserControl x:Name="PopupUserControl"/>-->
-        <!--<local:TextDisplayUserControl x:Name ="TestDisplayUserControl"/>-->
-        <!--<ContentControl Content="{Binding ContentWindow}"/>-->
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

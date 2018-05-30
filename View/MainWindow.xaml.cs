@@ -17,12 +17,11 @@ namespace AnalyticsViewer
         public MainWindow()
         {
             InitializeComponent();
-            mvm = new MainWindowViewModel();
-            mvm.InputBox = new InputBoxProvider();
+            mvm = new MainWindowViewModel(new InputBoxProvider());
 
             this.DataContext = mvm;
 
-            mvm.DisplayPopupWindow += DisplayPopupWindow;
+            mvm.LogFileViewModel.DisplayPopupWindow += DisplayPopupWindow;
 
         }
 

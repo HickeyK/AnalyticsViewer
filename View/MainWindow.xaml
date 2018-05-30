@@ -17,7 +17,7 @@
 
         <TabControl>
 
-            <TabItem Header="Log Files">
+            <TabItem Header="Log Files" DataContext="{Binding LogFileViewModel}">
                 <local:LogFileView/>
             </TabItem>
 
@@ -25,12 +25,12 @@
             <TabItem Header="AdHoc Queries">
             </TabItem>
 
-            <TabItem Header="By Run Date">
+            <TabItem Header="By Run Date" DataContext="{Binding RequestByRunDateViewModel}">
                 <local:RequestByRunDateView/>
             </TabItem>
 
 
-            <TabItem Header="By Security">
+            <TabItem Header="By Security"  DataContext="{Binding RequestBySecurityViewModel}">
                 <local:RequestBySecurityView/>
             </TabItem>
 
