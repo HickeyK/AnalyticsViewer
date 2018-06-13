@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace AnalyticsViewer
 {
@@ -13,5 +7,21 @@ namespace AnalyticsViewer
     /// </summary>
     public partial class App : Application
     {
+        private AnalyticsViewerContainer _analyticsViewerContainer;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            _analyticsViewerContainer = new AnalyticsViewerContainer();
+            _analyticsViewerContainer.RegisterCoreTypes();
+            _analyticsViewerContainer.RegisterInstances();
+
+
+            var mw = new MainWindow(_analyticsViewerContainer.CreateMainWindowViewModel());
+            mw.Show();
+
+        }
     }
+
 }

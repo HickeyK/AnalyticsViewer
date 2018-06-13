@@ -9,7 +9,7 @@ using AvEntities;
 
 namespace AvDataAccess
 {
-    public class AvDataContext : DataContext
+    public class AvDataContext : DataContext, IUnitOfWork
     {
         public AvDataContext(
             string connectionString,
@@ -21,9 +21,21 @@ namespace AvDataAccess
             base.CommandTimeout = commandTimeout;
         }
 
-        public Table<StoreYbAnalyticReq> StoreYbAnalyticReqs;
+        #region Linq Tables
 
-        public Table<StoreInYbAnalytic> StoreInYbAnalytic;
+
+        public Table<StoreYbAnalyticReq> StoreYbAnalyticReqs
+        {
+            get { return GetTable<StoreYbAnalyticReq>(); }
+        }
+
+        public Table<StoreInYbAnalytic> StoreInYbAnalytic
+        {
+            get { return GetTable<StoreInYbAnalytic>(); }
+        }
+
+
+        #endregion
 
         public List<DateTime> RunDateList()
         {
@@ -48,18 +60,18 @@ namespace AvDataAccess
         public List<StoreYbAnalyticReq> GetRequests(StoreYbAnalyticReq requestGroup)
         {
             return this.StoreYbAnalyticReqs
-                .Where(r => r.RunDate == requestGroup.RunDate && 
+                .Where(r => r.RunDate == requestGroup.RunDate &&
                             r.ValDate == requestGroup.ValDate &&
-                            r.Slot == requestGroup.Slot && 
+                            r.Slot == requestGroup.Slot &&
                             r.PortfolioId == requestGroup.PortfolioId)
                 .Select
                 (r => new StoreYbAnalyticReq()
                 {
                     RunDate = r.RunDate,
                     ValDate = r.ValDate,
-                    CadisId =  r.CadisId,
+                    CadisId = r.CadisId,
                     Slot = r.Slot,
-                    YbYieldbookId =  r.YbYieldbookId,
+                    YbYieldbookId = r.YbYieldbookId,
                     PortfolioId = r.PortfolioId,
                     UserBond = r.UserBond,
                     ParAmt = r.ParAmt,
@@ -77,7 +89,7 @@ namespace AvDataAccess
         public List<StoreYbAnalyticReq> GetRequestsByCadisId(int cadisId)
         {
             return this.StoreYbAnalyticReqs
-                .Where(r => r.CadisId == cadisId )
+                .Where(r => r.CadisId == cadisId)
                 .Select
                 (r => new StoreYbAnalyticReq()
                 {

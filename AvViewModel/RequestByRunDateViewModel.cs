@@ -1,27 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using AvDataAccess;
 using AvEntities;
 
 namespace AvViewModel
 {
-    public class RequestByRunDateViewModel : INotifyPropertyChanged, IDisposable
+    public class RequestByRunDateViewModel : IRequestByRunDateViewModel, INotifyPropertyChanged, IDisposable
     {
 
-        public RequestByRunDateViewModel(AvDataContext avDataContext)
+        public RequestByRunDateViewModel(IUnitOfWork avDataContext)
         {
             AvDataContext = avDataContext;
             RequestGroups = new ObservableCollection<StoreYbAnalyticReq>(AvDataContext.RequestGroup());
         }
 
 
-        public AvDataContext AvDataContext { get; set; }
+        public IUnitOfWork AvDataContext { get; set; }
 
         private StoreYbAnalyticReq _selectedRequestGroup;
 
@@ -85,7 +81,7 @@ namespace AvViewModel
         public ObservableCollection<StoreYbAnalyticReq> Requests { get; set; }
 
 
-        public ObservableCollection<DateTime> RunDates { get; set; }
+        //public ObservableCollection<DateTime> RunDates { get; set; }
 
         public ObservableCollection<StoreYbAnalyticReq> RequestGroups { get; set; }
 

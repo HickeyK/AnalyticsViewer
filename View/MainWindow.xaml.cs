@@ -12,16 +12,16 @@ namespace AnalyticsViewer
     public partial class MainWindow : Window
     {
 
-        private readonly MainWindowViewModel mvm;
+        private readonly IMainWindowViewModel Mvm;
 
-        public MainWindow()
+        public MainWindow(IMainWindowViewModel mvm)
         {
+            Mvm = mvm;
             InitializeComponent();
-            mvm = new MainWindowViewModel(new InputBoxProvider());
 
-            this.DataContext = mvm;
+            this.DataContext = Mvm;
 
-            mvm.LogFileViewModel.DisplayPopupWindow += DisplayPopupWindow;
+            Mvm.LogFileViewModel.DisplayPopupWindow += DisplayPopupWindow;
 
         }
 

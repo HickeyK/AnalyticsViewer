@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using AvDataAccess;
 using AvEntities;
 
 namespace AvViewModel
 {
-    public class RequestBySecurityViewModel : INotifyPropertyChanged, IDisposable
+    public class RequestBySecurityViewModel : IRequestBySecurityViewModel, INotifyPropertyChanged, IDisposable
     {
-        public AvDataContext AvDataContext { get; set; }
+        public IUnitOfWork AvDataContext { get; set; }
 
 
         public ObservableCollection<StoreYbAnalyticReq> Requests { get; set; }
@@ -23,7 +19,7 @@ namespace AvViewModel
         public DelegateCommand<string> RetrieveByYieldbookIdCommand { get; private set; }
 
 
-        public RequestBySecurityViewModel(AvDataContext avDataContext)
+        public RequestBySecurityViewModel(IUnitOfWork avDataContext)
         {
             AvDataContext = avDataContext;
 
